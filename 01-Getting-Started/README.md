@@ -62,3 +62,17 @@ Access User Location
 
 ### Media API
 Access Device camera and Microphone
+
+## PWAs and SPAs (Single Page Application)?
+
+### SPA
+* Powered by JS
+* Highly Reactive (to User Input)
+* Only one HTML File sent to Browser
+
+### PWA
+* Uses a lot of JS (but works without it!)
+* Aims to have high Reactivity
+* Works with multiple Files
+
+Wrong Comparison!
