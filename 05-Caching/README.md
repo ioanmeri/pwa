@@ -51,3 +51,25 @@ self.addEventListener('install', function(event){
     );
 });
 ```
+
+## Retrieving items from the Cache
+The key we cache is always a **Request object**, never a string.
+
+```
+self.addEventListener('fetch', function(event){
+    event.respondWith(
+        caches.match(event.request)
+            .then(function(response){
+                if (response) {
+                    return response;
+                } else {
+                    return fetch(event.request);
+                }
+            })
+    );
+});
+```
+
+We are intercepting the request and we're not issuing a new one.
+
+Even "/" request must be cached.
