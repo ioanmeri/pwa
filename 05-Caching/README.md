@@ -73,3 +73,35 @@ self.addEventListener('fetch', function(event){
 We are intercepting the request and we're not issuing a new one.
 
 Even "/" request must be cached.
+
+## Implementing Dynamic Caching
+
+Instead of add, we use **put** that requires you to provide a request and response key-value pair. So put **doesn't send any request**.
+
+### Key Points
+
+We must return the response so that in our promise chain then is returned to the original requester, which is coming from our HTML page or JS files.
+
+You can only consume (which means use) a response once. So we should call response clone.
+
+```
+self.addEventListener('fetch', function (event) {
+   event.respondWith(
+      caches.match(event.request)
+         .then(function (response) {
+            if (response) {
+               return response;
+            } else {
+               return fetch(event.request)
+                  .then(function (res) {
+                     return caches.open('dynamic')
+                        .then(function (cache) {
+                           cache.put(event.request.url, res.clone());
+                           return res;
+                        })
+                  })
+            }
+         })
+   );
+});
+```
