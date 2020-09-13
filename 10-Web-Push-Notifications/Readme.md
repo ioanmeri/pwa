@@ -46,4 +46,31 @@ Your service worker can now send this created subscription, to your back-end ser
 It will be later our back end server which later wants to push messages to the front-end app.
 
 
-Our Backend Server > Browser Vendor Push Server (API endpoint) > Delivers it to Service Worker (push event) > Display Notification 
+Our Backend Server > Browser Vendor Push Server (API endpoint) > Delivers it to Service Worker (push event) > Display Notification
+
+## Displaying Notifications
+
+No "push" Event needs to be triggered to display Notifications!
+
+### Notification API
+
+We'll use the notification API to create and show notifications, set title, body & more.
+
+Via Service Workers (Necessary when working with "push" Event!) or Via Page JS
+
+### Get Permissions
+
+2 buttons with ```enable-notifications``` class for desktop & mobile.
+
+Check if browser supports notifications
+```
+if ('Notification' in window) {
+  
+}
+```
+
+if you ask for notification permissions, you implicitly ask for push permissions.
+
+Notifications **depend on the device** you're displaying it on, not on the browser, because they are shown by the device.
+
+Notification is a **system feature** displayed by the OS. Hence the user may interact with it when our page isn't even open.
