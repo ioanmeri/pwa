@@ -74,3 +74,31 @@ if you ask for notification permissions, you implicitly ask for push permissions
 Notifications **depend on the device** you're displaying it on, not on the browser, because they are shown by the device.
 
 Notification is a **system feature** displayed by the OS. Hence the user may interact with it when our page isn't even open.
+
+## Push part of Push Notifications
+
+### Protecting Vendor Server Url endpoint
+
+2 ways
+
+We do it by passing configuration to subscribe with a JS object.
+
+We set our **own back-end server as the only valid source**, sending new push messages.
+
+### **VAPID** with WebPush
+
+We Have 2 keys. A public and a private one.
+
+Install webpush and use it to generate these vapid keys, to then use to secure the push messages.
+
+#### Cloud Functions
+```
+npm install web-push
+```
+
+You only run this once during development:
+```
+npm run web-push generate-vapid-keys
+```
+
+This gives us a public and a private key
